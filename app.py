@@ -16,7 +16,6 @@ WORHBENCH_PASSWORD = os.getenv('WORHBENCH_PASSWORD')
 # WORHBENCH_PASSWORD = os.environ.get('WORHBENCH_PASSWORD')
 print(WORHBENCH_PASSWORD)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{WORHBENCH_PASSWORD}@localhost:3306/bird-identification'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:jj99220101@localhost:3306/bird-identification'
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/bird-identification'
 
