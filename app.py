@@ -6,29 +6,44 @@ from ultralytics import YOLO
 import exifread
 import time
 import cv2
-
+from dotenv import load_dotenv
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/bird-identification'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/bird-identification'
+load_dotenv()
+WORHBENCH_PASSWORD = os.getenv('WORHBENCH_PASSWORD')
+# WORHBENCH_PASSWORD = os.environ.get('WORHBENCH_PASSWORD')
+print(WORHBENCH_PASSWORD)
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://root:{WORHBENCH_PASSWORD}@localhost:3306/bird-identification'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:jj99220101@localhost:3306/bird-identification'
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/bird-identification'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bird_name_table = {
-    "Stonechat": "岩鷚",
-    "Black-crowned Night Heron": "黑冠麻鷺",
-    "Streak-breasted Scimitar Babbler": "紋翼畫眉",
-    "Daurian Redstart": "紅尾伯勞",
-    "Eurasian Tree Sparrow": "麻雀",
-    "Ring-necked Pheasant": "環頸雉",
-    "Taiwan Scimitar Babbler": "臺灣白喉噪眉",
-    "Mikado Pheasant": "董雞",
-    "Coal Tit": "煤山雀",
-    "House Sparrow": "麻雀",
-    "Rock Pigeon": "野鴿",
-    "Plumbeous Water Redstart": "鉛色水鶇",
-    "Hill Myna": "八哥",
-    "Taiwan spotted turtle": "台灣班龜"
+    "Columba livia (Rock_Pigeon)": "野鴿",
+    "Carpodacus formosanus": "台灣朱雀",
+    "Syrmaticus mikado": "帝雉",
+    "Lophura swinhoii": "藍腹鵰",
+    "Urocissa caerulea": "台灣藍鵲",
+    "Alpine Accentor": "岩鷚",
+    "Gorsachius melanolophus": "黑冠麻鷺",
+    "Gracupica nigricollis": "黑領椋鳥",
+    "Passer cinnamomeus": "山麻雀",
+    "Passer montanus": "麻雀",
+    "Lanius cristatus": "紅尾伯勞",
+    "Actinodura morrisoniana": "紋翼畫眉",
+    "Pterorhinus ruficeps": "臺灣白喉噪眉",
+    "Acridotheres javanicus": "白尾八哥",
+    "Acridotheres tristis": "家八哥",
+    "Acridotheres cristatellus": "冠八哥",
+    "Phasianus colchicus": "環頸雉",
+    "Periparus ater(Coal Tit)": "煤山雀",
+    "Aplonis panayensis": "亞洲輝椋鳥",
+    "Copsychus malabaricus": "白腰鵲鴝",
+    "Sturnia malabarica": "灰頭椋鳥"
 }
 
 class Users(db.Model):
@@ -289,4 +304,4 @@ def out_cutting_image(class_name, predict_dir):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0',port=5001)
