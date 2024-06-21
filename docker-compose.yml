@@ -1,0 +1,6 @@
+services:
+  image-on:
+    image: p587233200/bird-identification-backend:latest
+    ports: 
+      - 5001:5001
+    restart: always

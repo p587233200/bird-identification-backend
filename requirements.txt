@@ -1,3 +1,8 @@
-Flask==2.0.2
-SQLAlchemy==1.4.31
-Werkzeug==2.0.2
+Flask
+flask_sqlalchemy
+SQLAlchemy
+ultralytics
+exifread
+openc_python_headless
+python-dotenv
+flask_cors
